@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Entry</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to the Examination</h1>
+        <div class="form-group">
+            <label for="studentName">Enter Your Full Name</label>
+            <input type="text" id="studentName" placeholder="Your Name" required style="text-transform: uppercase;">
+        </div>
+        <button id="startBtn">Next</button>
+    </div>
+    <script>
+        const studentNameInput = document.getElementById('studentName');
+        studentNameInput.addEventListener('input', () => {
+            studentNameInput.value = studentNameInput.value.toUpperCase();
+        });
+
+        document.getElementById('startBtn').addEventListener('click', async () => {
+            const name = studentNameInput.value.trim();
+            if (!name) return alert('Please enter your name.');
+
+            try {
+                const response = await fetch('/api/check-student', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ studentName: name })
+                });
+
+                if (!response.ok) {
+                    return alert('Unable to verify student status. Please try again.');
+                }
+
+                const { exists } = await response.json();
+                if (exists) {
+                    window.location.href = 'already-exists.html';
+                    return;
+                }
+
+                sessionStorage.setItem('studentName', name);
+                window.location.href = 'quiz.html';
+            } catch (error) {
+                alert('Network error. Please try again.');
+            }
+        });
+    </script>
+</body>
+</html>

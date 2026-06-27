@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Failed</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .error-card {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        .error-icon {
+            font-size: 48px;
+            color: #dc2626;
+            margin-bottom: 20px;
+        }
+        .btn-retry {
+            display: inline-block;
+            margin-top: 25px;
+            padding: 10px 20px;
+            background-color: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .btn-retry:hover {
+            background-color: #1d4ed8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" style="max-width: 500px; margin-top: 10% !important;">
+        <div class="error-card">
+            <div class="error-icon">❌</div>
+            <h1>Access Denied</h1>
+            <p style="color: #64748b; margin-top: 10px;">Invalid Admin Username or Password. You do not have permission to view the control panel.</p>
+            <a href="admin.html" class="btn-retry">Try Again</a>
+        </div>
+    </div>
+</body>
+</html>
