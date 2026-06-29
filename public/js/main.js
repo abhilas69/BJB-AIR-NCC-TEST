@@ -2,6 +2,22 @@ let totalSeconds = 50 * 60; // 50 Minutes
 let timerInterval;
 const studentName = sessionStorage.getItem('studentName');
 
+// Disable right-click and mobile long-press context menus
+document.addEventListener('contextmenu', function(e) {
+  e.preventDefault();
+});
+
+// Disable copy commands and keyboard shortcuts (Ctrl+C / Cmd+C)
+document.addEventListener('copy', function(e) {
+  e.preventDefault();
+  alert("Copying text is strictly disabled during the test.");
+});
+
+// Disable cutting text (Ctrl+X / Cmd+X)
+document.addEventListener('cut', function(e) {
+  e.preventDefault();
+});
+
 if (!studentName) {
     window.location.href = 'index.html';
 }
@@ -98,3 +114,43 @@ async function submitExam(e) {
         console.error(err);
     }
 }
+
+// Target elements with the mobile-no-select class
+const mobileElements = document.querySelectorAll('.mobile-no-select');
+
+mobileElements.forEach(element => {
+  // Prevent the long-press context menu on mobile devices
+  element.addEventListener('contextmenu', (e) => {
+    // Check if the event was triggered by a touch (mobile) rather than a mouse click
+    if (window.matchMedia("(pointer: coarse)").matches) {
+      e.preventDefault();
+    }
+  });
+});
+
+
+// Disable Right-Click Context Menu
+document.addEventListener('contextmenu', (e) => {
+  e.preventDefault();
+});
+
+// Disable Copy and Cut events
+document.addEventListener('copy', (e) => {
+  e.preventDefault();
+});
+document.addEventListener('cut', (e) => {
+  e.preventDefault();
+});
+
+// Disable Keyboard Shortcuts (Ctrl+C, Ctrl+X, Ctrl+U, F12)
+document.addEventListener('keydown', (e) => {
+  // Block Ctrl+C (Copy) and Ctrl+X (Cut)
+  if (e.ctrlKey && (e.key === 'c' || e.key === 'x')) {
+    e.preventDefault();
+  }
+  
+  // Optional: Block F12 and Ctrl+Shift+I (To hide Inspect Element)
+  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+    e.preventDefault();
+  }
+});
