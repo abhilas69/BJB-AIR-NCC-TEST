@@ -20,7 +20,7 @@ const ADMIN_CREDENTIALS = {
 
 // 3. DATABASE CONNECTION
 mongoose.connect(process.env.MONGODB_URI)
-    .then(() => console.log('Connected to MongoDB Atlas successfully.'))
+    .then(() => console.log('Connected to database successfully.'))
     .catch(err => console.error('Database connection error:', err));
 
 

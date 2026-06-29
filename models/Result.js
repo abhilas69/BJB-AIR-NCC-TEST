@@ -25,7 +25,7 @@ const resultSchema = new mongoose.Schema({
     submittedAt: {
         type: Date,
         default: Date.now,
-        expires: 86400,
+        index:{expires: '24h'}
     }
 });
 
