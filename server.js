@@ -14,8 +14,8 @@ app.use(express.static('public'));
 
 // 2. HARDCODED ADMIN CREDENTIALS
 const ADMIN_CREDENTIALS = {
-    "abhilas": "2006",
-    "soumya": "2006"
+    "username": process.env.ADMIN_ID,
+    "password": process.env.ADMIN_PASS
 };
 
 // 3. DATABASE CONNECTION
@@ -29,11 +29,14 @@ mongoose.connect(process.env.MONGODB_URI)
 // Admin Login Authentication Endpoint
 app.post('/api/admin/login', (req, res) => {
     const { username, password } = req.body;
+    if(username!==ADMIN_CREDENTIALS.username){
+        res.status(401).json({success:false,message:'Invalid Username'})
+    }
     
-    if (ADMIN_CREDENTIALS[username] && ADMIN_CREDENTIALS[username] === password) {
+    if (password===ADMIN_CREDENTIALS.password) {
         res.status(200).json({ success: true, message: "Login successful" });
     } else {
-        res.status(401).json({ success: false, message: "Invalid Username or Password" });
+        res.status(401).json({ success: false, message: "Invalid Password" });
     }
 });
 

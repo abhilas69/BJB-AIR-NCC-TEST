@@ -91,7 +91,7 @@ function renderUserList() {
     const list = document.getElementById('userList');
     list.innerHTML = '';
 
-    if(allResults.length === 0) {
+    if (allResults.length === 0) {
         list.innerHTML = '<p>No test attempts recorded yet.</p>';
         return;
     }
@@ -105,7 +105,7 @@ function renderUserList() {
             </div>
             <div class="details-card" id="details-${idx}" style="display:none; background:#f8fafc; padding:15px; border-radius:6px; margin-top:10px; border:1px solid #e2e8f0;"></div>
         `;
-        
+
         row.addEventListener('click', (e) => {
             if (e.target.classList.contains('download-pdf-btn')) return;
             const card = document.getElementById(`details-${idx}`);
